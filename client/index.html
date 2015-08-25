@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="story">
+    <head>
+        <title>India Roasts</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	    <script type="text/javascript" src="appResources/library/angular/angular.min.js"></script>
+	    <script type="text/javascript" src="appResources/library/angular/angular-route-min.js"></script>
+		<link rel="stylesheet" type="text/css" href="appResources/library/TwitterBootStrap/bootstrap.min.css">
+		<script type="text/javascript" src="/appResources/app.js"></script>
+		
+	</head>
+	<style>
+		body {
+  background-color: #F1F1F1; 
+  font-family:'Century Gothic', CenturyGothic, AppleGothic, sans-serif;}
+  .backColor {
+    position: fixed;
+    background-color: #009688;
+    color:white;
+    height: 50px;
+    padding-top: 3px;
+    z-index: 50;
+    box-shadow: #444 0 0 5px;
+}
+.hand {
+    cursor:pointer;
+}
+.titleRoast{
+	    font-size: 22px;
+    margin-top: 7px;
+    margin-left: 50px;
+}
+	</style>
+
+    <body ng-controller="indexController">
+        <!--Navbar Begin-->
+
+        <div class="container-fluid">
+	        <div class="row">
+	            <div class="col-xs-12 backColor">
+	                <div class="row">
+                        <div class="col-xs-12">
+                                 <p class="hand pull-left titleRoast">PanchviPaas sex stories</p>
+                        </div>
+                    </div>
+	            </div>
+	        </div>
+	        <div class="row">
+	       		<div class="col-xs-12">
+
+	       			<div id="main">
+
+						        <!-- angular templating -->
+						        <!-- this is where content will be injected -->
+						        <div ng-view></div>
+
+						    </div>
+	       			
+	       		</div>
+	        </div>
+    </div>
+        <!-- Left Fixed Bar End-->
+    </body>
+</html>

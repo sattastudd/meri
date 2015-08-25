@@ -1,0 +1,45 @@
+<style>
+	.storyTitle{
+		font-size: 40px;
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	}
+	.storyName{
+		    font-size: 40px;
+		    margin-top: -10px;
+		    color: blue;
+		    cursor: pointer;
+	}
+	.storyBorder{
+		    border-bottom: 1px solid grey;
+		    margin-bottom: 35px;
+		    padding-bottom: 15px;
+	}
+	.storyBtn{
+		background-color: #009688;
+		border-radius: 5px;
+		color: #fff;
+	}
+	@media screen and (max-width: 768px) {
+		.storyName{
+		    font-size: 21px;
+		    margin-top: 3px;
+		    color: blue;
+		}
+	}
+</style>
+<div ng-controller="homeController">
+	<div class="container">
+		<div class="row" style="margin-top:50px;">
+			<div class="col-xs-12">
+				<p class="storyTitle">Hot Sex Stories</p>
+			</div>
+			<div class="col-xs-12 storyBorder">
+				<button class="btn storyBtn" ng-click="goToAddStory()" type="button">Write a Story</button>
+			</div>
+	        <div class="col-xs-12" ng-click="goToStory()" ng-repeat="story in stories">
+	        	<p class="storyName">{{story.name}}</p>
+	        </div>
+	    </div>
+    </div>
+</div>

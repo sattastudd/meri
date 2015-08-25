@@ -1,0 +1,26 @@
+<style>
+		.storyName{
+		    font-size: 40px;
+		    margin-bottom: 10px;
+		    cursor: pointer;
+		    border-bottom: 1px solid grey;
+	}
+	@media screen and (max-width: 768px) {
+		.storyName{
+		    font-size: 20px;
+		    margin-top: 10px;
+		}
+	}
+</style>
+<div ng-controller="storyController">
+	<div class="container-fluid">
+		<div class="row" style="margin-top:50px;">
+	        <div class="col-xs-12">
+	        	<p class="storyName"><b>{{title}}</b></p>
+	        </div>
+	        <div class="col-xs-12">
+	        	<p style="font-size:18px">{{content}}</p>
+	        </div>
+	    </div>
+    </div>
+</div>
