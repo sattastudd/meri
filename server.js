@@ -18,24 +18,24 @@ app.use('/', express.static(__dirname + '/client'));
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/client/index.html');
 });
-app.get('/story', function(req, res){
+app.get('/story/:id', function(req, res){
 	res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/add', function(req, res){
 	res.sendFile(__dirname + '/client/index.html');
 });
 
-//this is for using js files
-app.use('/appResources', express.static(__dirname + '/client/appResources'));
-
 app.use(bodyParser());
 
 //this is for posting data
+
+
+app.get('/storyList', roastController.list);
+
+app.get('/sex/:id', roastController.story);
+
+
 app.post('/postData', roastController.create);
-
-app.get('/storyList', roastController.find);
-
-app.get('/story', roastController.find);
 
 
 app.listen(3000, function(){

@@ -20,6 +20,13 @@
 		border-radius: 5px;
 		color: #fff;
 	}
+	.loader{
+       position: fixed;
+    margin-top: 200px;
+    margin-left: -169px;
+    z-index: 10;
+    width: 32px;
+}
 	@media screen and (max-width: 768px) {
 		.storyName{
 		    font-size: 21px;
@@ -37,7 +44,10 @@
 			<div class="col-xs-12 storyBorder">
 				<button class="btn storyBtn" ng-click="goToAddStory()" type="button">Write a Story</button>
 			</div>
-	        <div class="col-xs-12" ng-click="goToStory()" ng-repeat="story in stories">
+			<div ng-if="waiting">
+                    <img src="../images/loader.gif" class="loader" />
+                </div>
+	        <div class="col-xs-12" ng-click="goToStory(story)" ng-repeat="story in stories">
 	        	<p class="storyName">{{story.name}}</p>
 	        </div>
 	    </div>

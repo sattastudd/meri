@@ -5,7 +5,7 @@ app.config(function($routeProvider,$locationProvider) {
         $routeProvider
 
             // route for the home page
-            .when('/story', {
+            .when('/story/:id', {
                 templateUrl : '../views/story.html',
                 controller  : 'storyController'
             })
@@ -28,61 +28,93 @@ app.config(function($routeProvider,$locationProvider) {
         });
 
 
-app.controller('indexController', function($scope,$http,$location){
+app.controller('indexController', function($scope,$http,$location,$routeParams){
 
-        $scope.goToStory = function(){
-            $location.path('/story');
-        };
+        
         $scope.goToAddStory = function(){
             $location.path('/add');
         };
+
+        $scope.goToStory = function(story){
+           $scope.getStory = story._id;
+           $scope.storyID = '/story/'+$scope.getStory;
+           console.log($scope.storyID);
+            $location.path($scope.storyID);
+
+    };
+
 });
 
 
-app.controller('storyController', function($scope){
+app.controller('storyController', function($scope,$http,$rootScope,$routeParams){
 
-    console.log("inside story Controller");
+  storyID = '/sex/'+$routeParams.id;
 
-    $http.get('/story').success(function(data){
-            console.log(data);
+  console.log(storyID);
 
-            $scope.storyValue = data;
+  $scope.waiting = true;
+
+    $http.get(storyID).success(function(data){
+
+        console.log(data);
+        $scope.waiting = false;
+
+        $scope.title = data;
 
         }).error(function(data){
 
-        })
-
-    //$scope.stories = {name:'bhabhi ko choda',content:'sdfgsdfgsdfgsdfgsdfgsdfgdsfgsdfgsdf s fgsadg sadg sad safdas fds adf sadfas fd'}
-    $scope.title = $scope.storyValue.name;
-    $scope.content = $scope.storyValue.content;
+        });
+    
 });
 
-app.controller('homeController', function($scope,$http){
+app.controller('homeController', function($scope,$http,$location,$rootScope,$routeParams){
 
+        $scope.waiting = true;
         $http.get('/storyList').success(function(data){
             console.log(data);
-
-            $scope.stories = data.name;
+            $scope.waiting = false;
+            $scope.stories = data;
 
         }).error(function(data){
 
-        })
+        });
+
+        
+
 })
 
 app.controller('addController', function($scope,$http){
     $scope.story = {}
+    $scope.valid = true;
     $scope.postStory = function(){
 
-           console.log($scope.story);
-        $http.post('/postData', $scope.story).success(function(data){
-            console.log(data);
+           console.log($scope.story.name);
 
-        }).error(function(data){
+           if ($scope.story.name === null || angular.isUndefined($scope.story.name)) {
+                 $scope.valid = false;
+           }
+           else
+           if ($scope.story.content === null || angular.isUndefined($scope.story.content)) {
+                 $scope.valid = false;
+           }else{
+                 $scope.valid = true;
+                 console.log($scope.valid);
+           }
 
-        })
+        if( $scope.valid ){
+            $scope.waiting = true;
+            $http.post('/postData', $scope.story).success(function(data){
+                console.log(data);
+                $scope.waiting = false;
+                $scope.story = null; 
+            }).error(function(data){
+    
+            })
+        }
     }
 });
 
 app.controller('errorController', function($scope){
 
 });
+

@@ -1,6 +1,12 @@
 var mongoose 		= require('mongoose'),
-	collectionName 	= require('../controllers/roastController')
+collectionName 	= require('../controllers/roastController') 
 
-module.exports = mongoose.model('Stories',{
-	name: String, content: String
-})
+var model = mongoose.model('Stories',{
+name: String, content: String
+}) ; 
+
+
+var  getModel = function(){
+	return model;
+}
+exports.getModel = getModel;

@@ -5,6 +5,13 @@
 		    cursor: pointer;
 		    border-bottom: 1px solid grey;
 	}
+	.loader{
+       position: fixed;
+    margin-top: 200px;
+    margin-left: -169px;
+    z-index: 10;
+    width: 32px;
+}
 	@media screen and (max-width: 768px) {
 		.storyName{
 		    font-size: 20px;
@@ -14,12 +21,15 @@
 </style>
 <div ng-controller="storyController">
 	<div class="container-fluid">
-		<div class="row" style="margin-top:50px;">
+		<div class="row" style="margin-top:50px;" ng-repeat="value in title">
 	        <div class="col-xs-12">
-	        	<p class="storyName"><b>{{title}}</b></p>
+	        	<p class="storyName"><b>{{value.name}}</b></p>
 	        </div>
+	        <div ng-if="waiting">
+                    <img src="../images/loader.gif" class="loader" />
+                </div>
 	        <div class="col-xs-12">
-	        	<p style="font-size:18px">{{content}}</p>
+	        	<p style="font-size:18px">{{value.content}}</p>
 	        </div>
 	    </div>
     </div>

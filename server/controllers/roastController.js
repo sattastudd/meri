@@ -1,29 +1,53 @@
-var roastCreate = require('../models/roastModel');
+var storyCreate = require('../models/roastModel');
 
 module.exports.create = function(req, res){
 	console.log(req.body);
+	
+	var model = storyCreate.getModel();
 
-	var roastNew = new roastCreate(req.body);
+	var newStory = new model(req.body);
 	
 	var collectionName = req.body.name;
 	console.log(collectionName);
 
-	roastNew.save(function(err, result){
+	newStory.save(function(err, result){
 		if (!err) {
 			res.json("success");
 		};
 	});
 }
 
-module.exports.find = function(req, res){
+
+module.exports.list = function(req, res){
 	//console.log(req.body);
 
-	var roastNew = new roastCreate();
+	var model = storyCreate.getModel();
 	
 	//var collectionName = req.body.name;
 	//console.log(collectionName);
 
-	roastNew.find({}, function (err, docs) {
-        res.json(docs);
+	model.find({}, function (err, result) {
+        res.json(result);
+	});
+}
+
+
+
+module.exports.story = function(req, res){
+	//console.log(req.body);
+
+	var model = storyCreate.getModel(req.params);
+	
+	//var collectionName = req.body.name;
+	//console.log(collectionName);
+	
+	console.log(req.params.id);
+
+	var data = req.params.id;
+
+	model.find({'_id' : data}, function (err, doc) {
+        res.json(doc);
+        console.log('value above doc');
+        console.log(doc);
 	});
 }
